@@ -1,0 +1,28 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: ---
+Resources:
+  myLaunchConfig: 
+    Type: AWS::AutoScaling::LaunchConfiguration
+    Properties: 
+      KeyName:  My-generic-Public
+      ImageId: ami-0ea4271fad9fbf43f
+      SecurityGroups: 
+        - sg-0ff782ea56dca056a
+      InstanceType: t2.micro
+  myASG: 
+    Type: AWS::AutoScaling::AutoScalingGroup
+    Properties: 
+      AvailabilityZones: 
+        Fn::GetAZs: ""
+      LaunchConfigurationName: 
+        Ref: myLaunchConfig
+      MinSize: "1"
+      MaxSize: "4"
+      Tags:
+        - Key: Environment
+          Value: Production
+          PropagateAtLaunch: "true"
+        - Key: Purpose
+          Value: WebServerGroup
+          PropagateAtLaunch: "false"
+  

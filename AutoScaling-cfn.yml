@@ -1,0 +1,15 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: ---
+Resources: 
+  ASG:
+    Type: AWS::AutoScaling::AutoScalingGroup
+    Properties:
+      AvailabilityZones: !GetAZs ''
+      LaunchConfigurationName: Webserver-Launch-Configuration
+      MaxSize: 0
+      MinSize: 0
+      Tags:
+        - Key: keyname
+          Value: value
+          PropagateAtLaunch: True
+

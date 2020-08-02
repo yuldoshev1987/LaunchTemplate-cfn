@@ -1,0 +1,18 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: My webserver Launch Template
+Parameters: 
+  KeyName:
+    Description: The EC2 Key Pair to allow SSH access to the instances
+    Type: 'AWS::EC2::KeyPair::KeyName'
+    ConstraintDescription: must be the name of an existing EC2 KeyPair.
+Resources: 
+  MyLaunchTemplate:
+   Type: AWS::EC2::LaunchTemplate
+   Properties:
+     LaunchTemplateName: MyWebServerLaunchTemplate
+     LaunchTemplateData: 
+      InstanceType: t2.micro
+      KeyName: !Ref KeyName
+      ImageId: ami-0ea4271fad9fbf43f
+      SecurityGroupIds:
+        - sg-0ff782ea56dca056a
